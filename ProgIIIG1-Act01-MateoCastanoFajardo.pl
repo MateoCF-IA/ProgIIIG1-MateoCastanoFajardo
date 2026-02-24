@@ -1,3 +1,7 @@
+EJERCICIO 1
+
+HECHOS
+
 % Padres de Homero
 padre(abraham, homero).
 madre(mona, homero).
@@ -27,6 +31,8 @@ madre(marge, maggie).
 
 % Madre de Ling
 madre(selma, ling).
+
+REGLAS
 
 hijo(X, Y) :- padre(Y, X).
 hijo(X, Y) :- madre(Y, X).
@@ -69,3 +75,53 @@ primo(X, Y) :-
     madre(A, X),
     madre(B, Y),
     hermano(A, B).
+
+EJEMPLOS
+
+abuelo(abraham, bart).
+hermano(lisa, bart).
+tio(patty, bart).
+primo(ling, bart).
+
+
+EJERCICIO 2
+
+HECHOS
+
+% Nacionalidad
+estadounidense(west).
+
+% País
+nacion(corea_del_sur).
+
+% Enemistad
+enemigo(corea_del_sur, estados_unidos).
+
+% Misiles que posee Corea del Sur
+tiene(corea_del_sur, m1).
+misil(m1).
+
+% Venta
+vendio(west, m1, corea_del_sur).
+
+REGLAS
+
+hostil(X) :-
+nacion(X),
+enemigo(X, estados_unidos).
+
+crimen(X) :-
+estadounidense(X),
+vendio(X, Arma, Pais),
+arma(Arma),
+hostil(Pais).
+
+arma(X) :-
+misil(X).
+
+criminal(X) :-
+crimen(X).
+
+CONSULTA
+
+?- criminal(west).
